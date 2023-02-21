@@ -29,3 +29,22 @@ if $CALCULATOR 3 @ 2; then  # If the return code of $PROGRAM is zero (i.e. succe
   echo 'ERROR! An invalid run of the application (3 @ 2) apparently succeeded?!'
   exit 1
 fi
+
+# Test 04: Ensure the program runs without error with a simple, valid multiplication invocation.
+if ! $CALCULATOR 1 '*' 1; then  # If the return code of $PROGRAM is non-zero (i.e. error)...
+  echo 'ERROR! A valid run of the calculator (1 * 1) failed!'
+  exit 1
+fi
+
+# Test 02: Ensure simple multiplication case has correct output...
+if [[ $($CALCULATOR 1 '*' 1) -ne 1 ]]; then  # If the output of the program is not 1...
+  echo 'ERROR! A valid run of the calculator (1 * 1) failed to produce 1 as an output!'
+  exit 1
+fi
+
+# Test 03: Ensure program errors with an invalid operand
+if $CALCULATOR 3 ! 2; then  # If the return code of $PROGRAM is zero (i.e. success)...
+  echo 'ERROR! An invalid run of the application (3 ! 2) apparently succeeded?!'
+  exit 1
+fi
+
